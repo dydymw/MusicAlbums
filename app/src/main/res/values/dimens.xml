@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grid_expected_size">120dp</dimen>
+    <dimen name="item_margin_horizontal">24dp</dimen>
+    <dimen name="item_margin_vertical">8dp</dimen>
+
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+
+    <dimen name="tag_textSize">14sp</dimen>
+    <dimen name="tag_pading">4dp</dimen>
+    <dimen name="tag_draw_pading">2dp</dimen>
+
+    <dimen name="btn_width">1dp</dimen>
+
+    <dimen name="tabview_height">58dp</dimen>
+    <dimen name="tabview_icon_height">32dp</dimen>
+    <dimen name="tabview_icon_width">32dp</dimen>
+    <dimen name="tabview_icon_margin_top">0dp</dimen>
+    <dimen name="tabview_text_margin_top">2dp</dimen>
+</resources>
