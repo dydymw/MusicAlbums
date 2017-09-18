@@ -52,6 +52,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager vpContainer;
     private RadioGroup rgTabButtons;
     private ImageView showBtn;
+    private ImageView backBtn;
     private ProgressBar progressBar;
 
     private List<String> mSelected;
@@ -121,7 +123,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addRequestCode(100)
                 .permissions(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.CHANGE_CONFIGURATION)
                 .request();
 
     }
@@ -141,16 +146,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((RadioButton) rgTabButtons.getChildAt(0)).setChecked(true);
         showBtn = (ImageView) findViewById(R.id.show);
         showBtn.setOnClickListener(this);
+        backBtn = (ImageView) findViewById(R.id.back);
+        backBtn.setOnClickListener(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
     }
 
@@ -202,6 +202,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.show:
                 show();
                 break;
+            case R.id.back:
+                finish();
         }
     }
 
@@ -355,25 +357,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     object.put("PhotosList", photosUrl);
                     object.put("TextList", textArray);
                     object.put("AlbumsName", chooseMusicFragment.getAlbumsName());
-                    object.put("Loaction", chooseMusicFragment.getLocationString());
-                    object.put("Cover", chooseMusicFragment.getCoverPath());
-                    object.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(AVException e) {
-                            if (e == null) {
-                                photosId = object.getObjectId();
+                    object.put("LoactionName", chooseMusicFragment.getLocationName());
+                    object.put("locationCoordinate",chooseMusicFragment.getLocationCoordinate());
+                    File file = new File(chooseMusicFragment.getCoverPath());
+                    try {
+                        final AVFile coverFile = AVFile.withFile(file.getName(),file);
+                        coverFile.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(AVException e) {
+                                object.put("coverUrl",coverFile.getUrl());
+                                object.saveInBackground(new SaveCallback() {
+                                    @Override
+                                    public void done(AVException e) {
+                                        if (e == null) {
+                                            photosId = object.getObjectId();
 
 
-                                Message message = new Message();
-                                message.what = UPDATE_TEXT;
-                                handler.sendMessage(message);
-                                System.out.println(TAG + object.getObjectId());
-                                System.out.println(TAG + photosId);
-                            } else {
-                                System.out.println(TAG + "1111111111111");
+                                            Message message = new Message();
+                                            message.what = UPDATE_TEXT;
+                                            handler.sendMessage(message);
+                                            System.out.println(TAG + object.getObjectId());
+                                            System.out.println(TAG + photosId);
+                                        } else {
+                                            System.out.println(TAG + "1111111111111");
+                                        }
+                                    }
+                                });
                             }
-                        }
-                    });
+                        });
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             });
 

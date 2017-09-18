@@ -18,4 +18,5 @@
     <dimen name="tabview_icon_width">32dp</dimen>
     <dimen name="tabview_icon_margin_top">0dp</dimen>
     <dimen name="tabview_text_margin_top">2dp</dimen>
+
 </resources>

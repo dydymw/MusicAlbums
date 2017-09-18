@@ -21,15 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.tdme.android.musicalbums.activity.BaseActivity;
-import com.tdme.android.musicalbums.activity.EmptyActivity;
-import com.tdme.android.musicalbums.activity.ShowActivity;
-import com.tdme.android.musicalbums.bean.ListEvent;
+import com.tdme.android.musicalbums.activity.MapActivity;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
 
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +46,8 @@ public class ChooseMusicFragment extends Fragment {
     private EditText albumsName;
     private ImageView coverImg;
     private String coverPath;
-    private String locationString;
+    private String locationCoordinate;
+    private String locationName;
 
     private static final int REQUEST_CODE = 731;
     private static final int REQUEST_LOCATION = 730;
@@ -76,7 +73,7 @@ public class ChooseMusicFragment extends Fragment {
         selectedLocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), EmptyActivity.class);
+                Intent intent = new Intent(getContext(), MapActivity.class);
                 startActivityForResult(intent, REQUEST_LOCATION);
             }
         });
@@ -118,11 +115,14 @@ public class ChooseMusicFragment extends Fragment {
                 return;
             }
 
-            if (requestCode == REQUEST_LOCATION) {
-                locationString = data.getStringExtra("");//返回位置
-                selectedLocate.setText(locationString);
+
+        }
+        if (resultCode == REQUEST_LOCATION) {
+                locationName = data.getStringExtra("locationName");
+                locationCoordinate = data.getStringExtra("locationCoordinate");
+                selectedLocate.setText(locationName);
                 return;
-            }
+
         }
 
 
@@ -160,8 +160,12 @@ public class ChooseMusicFragment extends Fragment {
         return albumsName.getText().toString();
     }
 
-    public String getLocationString() {
-        return locationString;
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public String getLocationCoordinate() {
+        return locationCoordinate;
     }
 
     public String getCoverPath() {
