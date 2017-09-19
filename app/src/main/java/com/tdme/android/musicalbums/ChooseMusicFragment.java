@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,9 @@ public class ChooseMusicFragment extends Fragment {
     private String coverPath;
     private String locationCoordinate;
     private String locationName;
+    private boolean permission;
+    private TextView permissionTv;
+    private Switch aSwitch;
 
     private static final int REQUEST_CODE = 731;
     private static final int REQUEST_LOCATION = 730;
@@ -94,6 +99,23 @@ public class ChooseMusicFragment extends Fragment {
         mSpinner.setAdapter(arr_adapter);
         mSpinner.setOnItemSelectedListener(new SpinnerSelectedListener());
 
+        permissionTv = (TextView) view.findViewById(R.id.permission);
+        aSwitch = (Switch) view.findViewById(R.id.switch_btn);
+        permissionTv.setText("私有");
+        permission = aSwitch.isChecked();
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    permissionTv.setText("公开");
+                    permission = isChecked;
+                }else {
+                    permissionTv.setText("私有");
+                    permission = isChecked;
+                }
+            }
+        });
+
         return view;
     }
 
@@ -118,10 +140,10 @@ public class ChooseMusicFragment extends Fragment {
 
         }
         if (resultCode == REQUEST_LOCATION) {
-                locationName = data.getStringExtra("locationName");
-                locationCoordinate = data.getStringExtra("locationCoordinate");
-                selectedLocate.setText(locationName);
-                return;
+            locationName = data.getStringExtra("locationName");
+            locationCoordinate = data.getStringExtra("locationCoordinate");
+            selectedLocate.setText(locationName);
+            return;
 
         }
 
@@ -170,5 +192,9 @@ public class ChooseMusicFragment extends Fragment {
 
     public String getCoverPath() {
         return coverPath;
+    }
+
+    public boolean getPermission(){
+        return permission;
     }
 }

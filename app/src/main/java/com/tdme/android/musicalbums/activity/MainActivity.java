@@ -359,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     object.put("AlbumsName", chooseMusicFragment.getAlbumsName());
                     object.put("LoactionName", chooseMusicFragment.getLocationName());
                     object.put("locationCoordinate",chooseMusicFragment.getLocationCoordinate());
+                    object.put("permission",chooseMusicFragment.getPermission());
                     File file = new File(chooseMusicFragment.getCoverPath());
                     try {
                         final AVFile coverFile = AVFile.withFile(file.getName(),file);
