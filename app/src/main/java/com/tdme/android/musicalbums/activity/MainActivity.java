@@ -229,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case "2":
                         filepath = crop.cropshyf();
                         break;
-//                    case "3":
-//                        filepath = crop.cropfjrh();
+                    case "3":
+                        filepath = crop.cropfjrh();
 //                    case "4":
 //                        filepath = crop();
 //                        break;
@@ -241,7 +241,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        filepath = crop();
 //                        break;
                     default:
-
                         break;
                 }
                 Log.i(TAG, mSelected.get(0));

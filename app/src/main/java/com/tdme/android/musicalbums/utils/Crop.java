@@ -31,7 +31,7 @@ public class Crop {
         int i = 0;
         String[] a;
         filepaths = new ArrayList<>();
-        while (i <list.size()) {
+        while (i < list.size()) {
             filepaths.add(mr1(list.get(i)));
             i++;
             if (i < list.size())
@@ -161,6 +161,60 @@ public class Crop {
     }
 
 
+    public List<String> cropfjrh() {
+        int i = 0;
+        String[] a;
+        filepaths = new ArrayList<>();
+        while (i < list.size()) {
+            filepaths.add(fjrh1(list.get(i)));
+            i++;
+            if (i < list.size())
+                filepaths.add(fjrh2(list.get(i)));
+            else
+                continue;
+            i++;
+            if (i < list.size()) {
+                filepaths.add(fjrh3(list.get(i)));
+            } else
+                continue;
+            i++;
+            if (i < list.size()) {
+                filepaths.add(fjrh4(list.get(i)));
+            } else
+                continue;
+            i++;
+            if (i < list.size()) {
+                filepaths.add(fjrh5(list.get(i)));
+            } else
+                continue;
+            i++;
+            if (i + 1 < list.size()) {
+                a = fjrh6(list.get(i), list.get(i + 1));
+                filepaths.add(a[0]);
+                filepaths.add(a[1]);
+            } else
+                continue;
+            i = i + 2;
+            if (i + 2 < list.size()) {
+                a = fjrh7(list.get(i), list.get(i + 1), list.get(i + 2));
+                filepaths.add(a[0]);
+                filepaths.add(a[1]);
+                filepaths.add(a[2]);
+            } else
+                continue;
+            i = i + 3;
+            if (i + 1 < list.size()) {
+                a = fjrh8(list.get(i), list.get(i + 1));
+                filepaths.add(a[0]);
+                filepaths.add(a[1]);
+            } else
+                continue;
+            i = i + 2;
+        }
+        return filepaths;
+    }
+
+
     public String base1(String filepath, double w, double h) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap src = cropBitmap(BitmapFactory.decodeFile(filepath, options), w, h);
@@ -265,34 +319,40 @@ public class Crop {
         return base1(filepath, 65, 91);
     }
 
-    public String fengjingruhua1(String filepath) {
-        return base1(filepath, 85, 51);
+    public String fjrh1(String filepath) {
+        return base1(filepath, 64, 115);
     }
 
-    public String fengjingruhua2(String filepath) {
-        return base1(filepath, 41, 64);
+    public String fjrh2(String filepath) {
+        return base1(filepath, 64, 115);
     }
 
-    public String[] fengjingruhua3(String filepath1, String filepath2) {
-        return base2(filepath1, filepath2, 41, 22, 41, 22);
+    public String fjrh3(String filepath) {
+        return base1(filepath, 64, 115);
     }
 
-    public String[] fengjingruhua4(String filepath1, String filepath2) {
-        return base2(filepath1, filepath2, 41, 26, 41, 26);
+    public String fjrh4(String filepath) {
+        return base1(filepath, 58, 67);
+    }
+
+    public String fjrh5(String filepath) {
+        return base1(filepath, 58, 67);
+    }
+
+
+    public String[] fjrh6(String filepath1, String filepath2) {
+        return base2(filepath1, filepath2, 64, 43, 64, 39);
+    }
+
+    public String[] fjrh7(String filepath1, String filepath2, String filepath3) {
+        return base3(filepath1, filepath2, filepath3, 58, 34, 27, 34, 27, 47);
+    }
+
+    public String[] fjrh8(String filepath1, String filepath2) {
+        return base2(filepath1, filepath2, 64, 49, 64, 49);
 
     }
 
-    public String fengjingruhua5(String filepath) {
-        return base1(filepath, 1, 1);
-    }
-
-    public String[] fengjingruhua(String filepath1, String filepath2) {
-        return base2(filepath1, filepath2, 34, 22, 34, 26);
-    }
-
-    public String[] fengjingruhua(String filepath1, String filepath2, String filepath3) {
-        return base3(filepath1, filepath2, filepath3, 37, 21, 1, 1, 17, 29);
-    }
 
     public String saveBitmap(String bitName, Bitmap mBitmap) {
 
