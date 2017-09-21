@@ -68,4 +68,10 @@ public class ShowActivity extends AppCompatActivity {
         System.out.println(TAG + playmode);
         webView.loadUrl("http://alumt279.leanapp.cn/?albumId=" + id + "&modelId=0" + playmode);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
+    }
 }
