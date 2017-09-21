@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/6.
+ * 根据每个模板的图片参数进行裁剪图片
  */
 
 public class Crop {

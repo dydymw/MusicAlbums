@@ -26,6 +26,8 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/23.
+ *
+ * 添加字幕的Fragment
  */
 
 public class AddTextFragment extends Fragment{

@@ -16,6 +16,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+/**
+ * 选择地点的自定义ViewGroup
+ * Demo写的
+ */
+
 public class SegmentedGroup extends RadioGroup {
 
     private int mMarginDp;

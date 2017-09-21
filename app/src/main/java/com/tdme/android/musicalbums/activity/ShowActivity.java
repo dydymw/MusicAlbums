@@ -15,6 +15,10 @@ import android.widget.FrameLayout;
 
 import com.tdme.android.musicalbums.R;
 
+/**
+ * 这个是播放Activity
+ */
+
 public class ShowActivity extends AppCompatActivity {
     private static final String TAG = "ShowActivity";
     private WebView webView;

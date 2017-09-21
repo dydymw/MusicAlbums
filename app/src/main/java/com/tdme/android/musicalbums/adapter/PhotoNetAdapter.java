@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/23.
+ * 添加图片的Adapter
  */
 
 public class PhotoNetAdapter extends RecyclerView.Adapter<PhotoNetAdapter.MyHolder> {

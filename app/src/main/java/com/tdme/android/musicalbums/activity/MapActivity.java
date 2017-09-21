@@ -55,6 +55,10 @@ import com.tdme.android.musicalbums.SegmentedGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 定位Activity
+ */
+
 public class MapActivity extends AppCompatActivity implements LocationSource,
         AMapLocationListener, GeocodeSearch.OnGeocodeSearchListener, PoiSearch.OnPoiSearchListener, View.OnClickListener { // Inputtips.InputtipsListener
 

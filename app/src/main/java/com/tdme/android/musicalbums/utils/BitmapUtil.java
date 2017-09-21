@@ -19,6 +19,9 @@ import java.io.InputStream;
 
 /**
  * Created by Administrator on 2017/9/14.
+ * CompressHelper调用的工具类
+ *
+ * 和图片压缩是一起的
  */
 
 public class BitmapUtil {

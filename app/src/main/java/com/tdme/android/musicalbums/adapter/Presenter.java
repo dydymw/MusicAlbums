@@ -11,7 +11,9 @@ import java.util.Map;
 
 /**
  * Created by Administrator on 2017/9/4.
+ * 添加字幕的viewholder和Photos绑定
  */
+
 
 public class Presenter {
 

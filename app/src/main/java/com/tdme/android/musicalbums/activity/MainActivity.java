@@ -58,6 +58,10 @@ import java.util.List;
 
 import kr.co.namee.permissiongen.PermissionGen;
 
+/**
+ * MainActivity
+ */
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";

@@ -34,6 +34,8 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/23.
+ *
+ * 属性选择的Fragment
  */
 
 public class ChooseMusicFragment extends Fragment {

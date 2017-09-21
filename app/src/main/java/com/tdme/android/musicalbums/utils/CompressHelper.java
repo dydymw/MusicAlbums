@@ -8,6 +8,7 @@ import java.io.File;
 
 /**
  * Created by Administrator on 2017/9/14.
+ * 图片压缩类
  */
 
 public class CompressHelper {

@@ -2,6 +2,7 @@ package com.tdme.android.musicalbums.bean;
 
 /**
  * Created by Administrator on 2017/8/27.
+ * 添加字幕的item Bean
  */
 
 public class Photos {

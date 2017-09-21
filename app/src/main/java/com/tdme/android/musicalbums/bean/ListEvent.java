@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/30.
+ * EventBus的bean类
  */
 
 public class ListEvent {

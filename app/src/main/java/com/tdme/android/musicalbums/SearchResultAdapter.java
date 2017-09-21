@@ -14,6 +14,10 @@ import com.amap.api.services.core.PoiItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 搜索地点的Adapter
+ */
+
 public class SearchResultAdapter extends BaseAdapter {
 
     private List<PoiItem> data;

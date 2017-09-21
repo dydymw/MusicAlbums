@@ -7,6 +7,7 @@ import com.avos.avoscloud.AVOSCloud;
 
 /**
  * Created by Administrator on 2017/8/23.
+ * getContext
  */
 
 public class Myapplication extends Application {

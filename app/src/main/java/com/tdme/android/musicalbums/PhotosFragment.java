@@ -32,6 +32,8 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/23.
+ *
+ * 图片选择的Fragment
  */
 
 public class PhotosFragment extends Fragment {

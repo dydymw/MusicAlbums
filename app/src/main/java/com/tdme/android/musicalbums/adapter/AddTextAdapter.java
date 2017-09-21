@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/27.
+ *添加字幕的RecyclerView的Adapter
  */
 
 public class AddTextAdapter extends RecyclerView.Adapter<AddTextAdapter.ViewHolder> {

@@ -2,6 +2,9 @@ package com.tdme.android.musicalbums.utils;
 
 /**
  * Created by Administrator on 2017/9/14.
+ * FileUtil调用的字符串工具类
+ *
+ * 和图片压缩是一起的
  */
 
 public class StringUtil {

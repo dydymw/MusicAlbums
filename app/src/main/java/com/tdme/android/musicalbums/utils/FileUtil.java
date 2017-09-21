@@ -16,6 +16,9 @@ import java.io.OutputStream;
 
 /**
  * Created by Administrator on 2017/9/14.
+ * BitmapUtil 调用的工具类
+ *
+ * 和图片压缩是一起的
  */
 
 public class FileUtil {
