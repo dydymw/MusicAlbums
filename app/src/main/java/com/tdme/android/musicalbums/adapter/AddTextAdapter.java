@@ -80,6 +80,7 @@ public class AddTextAdapter extends RecyclerView.Adapter<AddTextAdapter.ViewHold
         });
     }
 
+
     @Override
     public int getItemCount() {
         return mPhotos.size();

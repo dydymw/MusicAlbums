@@ -74,11 +74,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<String> mSelected;
     private List<String> filepath;
+    List<String> textArray;
 
     private AVObject object;
     private AVFile file;
     final List<AVFile> photos = new ArrayList<>();
-    private String textArray[];
     private List<String> photosUrl = new ArrayList<>();
     private KickerFragmentAdapter adapter;
     private ChooseMusicFragment chooseMusicFragment;
@@ -310,12 +310,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 file.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(AVException e) {
-//                        if (i == mSelected.size()) {
-//
-//                            handler.post(upload);
-//
-//
-//                        }
                         counter(mfile);
 
                     }
@@ -339,8 +333,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (count == mFile.size()) {
             Log.i("tdmee", "counter: 1");
-            List<String> temp = Presenter.getInstance().getContentText();
-            textArray = temp.toArray(new String[temp.size()]);
+            textArray = Presenter.getInstance().getContentText();
             Log.i("tdmee", "counter: 2");
             for (int j = 0; j < photos.size(); j++) {
                 photosUrl.add(photos.get(j).getUrl().split("m/")[1]);
@@ -349,48 +342,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             Log.i("tdmee", "0");
-            AVQuery<AVObject> query = new AVQuery<>("Music");
-            query.whereEqualTo("playMode", getMusicName(playMode));
+            AVQuery<AVObject> query = new AVQuery<>("_File");
+            query.whereEqualTo("name", getMusicName(playMode));
             query.findInBackground(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
-                    musicKey = list.get(0).getString("musicKey");
+                    musicKey = list.get(0).getString("key");
                     object.put("playMode", playMode);
                     object.put("Music", musicKey);
                     object.put("PhotosList", photosUrl);
                     object.put("TextList", textArray);
                     object.put("AlbumsName", chooseMusicFragment.getAlbumsName());
                     object.put("LoactionName", chooseMusicFragment.getLocationName());
-                    object.put("locationCoordinate",chooseMusicFragment.getLocationCoordinate());
-                    object.put("permission",chooseMusicFragment.getPermission());
-                    File file = new File(chooseMusicFragment.getCoverPath());
-                    try {
-                        final AVFile coverFile = AVFile.withFile(file.getName(),file);
-                        coverFile.saveInBackground(new SaveCallback() {
+                    object.put("locationCoordinate", chooseMusicFragment.getLocationCoordinate());
+                    object.put("permission", chooseMusicFragment.getPermission());
+                    if (chooseMusicFragment.getCoverPath() != null) {
+                        File file = new File(chooseMusicFragment.getCoverPath());
+                        try {
+                            final AVFile coverFile = AVFile.withFile(file.getName(), file);
+                            coverFile.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(AVException e) {
+                                    object.put("coverUrl", coverFile.getUrl());
+                                    object.saveInBackground(new SaveCallback() {
+                                        @Override
+                                        public void done(AVException e) {
+                                            if (e == null) {
+                                                photosId = object.getObjectId();
+                                                Message message = new Message();
+                                                message.what = UPDATE_TEXT;
+                                                handler.sendMessage(message);
+                                            } else {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    else {
+                        object.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(AVException e) {
-                                object.put("coverUrl",coverFile.getUrl());
-                                object.saveInBackground(new SaveCallback() {
-                                    @Override
-                                    public void done(AVException e) {
-                                        if (e == null) {
-                                            photosId = object.getObjectId();
-
-
-                                            Message message = new Message();
-                                            message.what = UPDATE_TEXT;
-                                            handler.sendMessage(message);
-                                            System.out.println(TAG + object.getObjectId());
-                                            System.out.println(TAG + photosId);
-                                        } else {
-                                            System.out.println(TAG + "1111111111111");
-                                        }
-                                    }
-                                });
+                                if (e == null) {
+                                    photosId = object.getObjectId();
+                                    Message message = new Message();
+                                    message.what = UPDATE_TEXT;
+                                    handler.sendMessage(message);
+                                } else {
+                                    e.printStackTrace();
+                                }
                             }
                         });
-                    } catch (FileNotFoundException e1) {
-                        e1.printStackTrace();
                     }
                 }
             });
@@ -407,13 +413,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String musicName;
         switch (s) {
             case "1":
-                musicName = "默认主题";
+                musicName = "默认主题.mp3";
                 break;
             case "2":
-                musicName = "诗和远方";
+                musicName = "诗和远方.mp3";
                 break;
             case "3":
-                musicName = "风景如画";
+                musicName = "风景如画.mp3";
                 break;
             default:
                 musicName = null;
